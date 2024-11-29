@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circuitech Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+    }
+    input {
+      margin: 10px 0;
+      padding: 10px;
+      width: 200px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+    iframe {
+      margin-top: 20px;
+      border: 1px solid #cccccc;
+    }
+    #logout-btn {
+      margin-top: 20px;
+      background-color: #d62020;
+    }
+    #logout-btn:hover {
+      background-color: #c11717;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Form -->
+  <div id="login-form">
+    <form id="login">
+      <h1>Login to Circuitech</h1>
+      <input type="text" id="username" placeholder="Username" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <!-- Sensor Data Section -->
+  <div id="sensor-data" class="hidden">
+    <h1>Circuitech Project</h1>
+    <h2>Ultrasonic Sensor Data</h2>
+    <iframe width="600" height="400" src="https://thingspeak.com/channels/2731392/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=50&type=line&update=15"></iframe>
+    
+    <h3>MQ2 Sensor Data</h3>
+    <iframe width="600" height="400" src="https://thingspeak.com/channels/2731392/charts/2?bgcolor=%23ffffff&color=%231949eb&dynamic=true&results=50&type=line&update=15"></iframe>
+    
+    <!-- Logout Button -->
+    <button id="logout-btn">Logout</button>
+  </div>
+
+  <script>
+    // Valid credentials
+    const validUsername = "admin"; // Replace with your desired username
+    const validPassword = "password123"; // Replace with your desired password
+
+    // DOM elements
+    const loginForm = document.getElementById('login');
+    const sensorData = document.getElementById('sensor-data');
+    const loginDiv = document.getElementById('login-form');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    // Login functionality
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === validUsername && password === validPassword) {
+        alert("Login successful!");
+        loginDiv.classList.add('hidden');
+        sensorData.classList.remove('hidden');
+      } else {
+        alert("Invalid username or password!");
+      }
+    });
+
+    // Logout functionality
+    logoutBtn.addEventListener('click', function () {
+      alert("You have logged out!");
+      sensorData.classList.add('hidden');
+      loginDiv.classList.remove('hidden');
+      loginForm.reset(); // Clear login form inputs
+    });
+  </script>
+</body>
+</html>
